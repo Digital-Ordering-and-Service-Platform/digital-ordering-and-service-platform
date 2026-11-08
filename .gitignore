@@ -28,3 +28,6 @@ public/output.css
 *.test
 *.out
 bin/
+
+# Protected local media files
+services/backend/var/media/

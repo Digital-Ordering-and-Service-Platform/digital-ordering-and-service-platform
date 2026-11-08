@@ -3,7 +3,7 @@
 > **Customizable Digital Menu & Real-Time Ordering Platform for Ethiopian Restaurants & Cafes**  
 > *One cohesive, self-contained application — easily customized and white-labeled per restaurant deployment.*
 
-📖 **[Full Testing & Feature Walkthrough Guide](TESTING_GUIDE.md)** — Step-by-step instructions on running the app, accessing all screens on mobile/LAN, and testing end-to-end WebSocket ordering and waiter calls.
+📖 **[Full Testing & Feature Walkthrough Guide](docs/testing/TESTING_GUIDE.md)** — Step-by-step instructions on running the app and accessing the existing screens.
 
 ---
 
@@ -81,9 +81,9 @@ All interfaces across MenuFlow have been elevated to an authentic Ethiopian hosp
 ## 🔍 How to View and Test Each UI Surface
 
 ### Step 1: Start the Local Development Server
-Make sure you are in the `frontend` directory and start Next.js:
+Start the existing Next.js application from its monorepo location:
 ```bash
-cd frontend
+cd apps/web
 npm run dev
 ```
 The application runs at **`http://localhost:3000`**.
@@ -122,19 +122,45 @@ MenuFlow is **ONE deployable application** that runs independently for a specifi
 
 ## 🚀 Backend & Database Setup
 
-### Launch PostgreSQL & Redis
+### Launch PostgreSQL, Redis, and RabbitMQ
+
+The example values are for isolated local development only. Copy the template
+to an ignored root `.env` and replace the credentials before using shared
+environments. The existing PostgreSQL and Redis named volumes are preserved.
+
 ```bash
-docker compose up -d
+docker compose --env-file services/backend/.env.example up -d
 ```
 
-### Start the Go Backend
-```bash
-cd backend
-go run ./cmd/server/main.go
-```
-The Go API runs on `http://localhost:8080`. Handlers for sales analytics, menu catalogs, table queries, settings, and CORS are pre-mounted.
+Apply the reviewed Atlas migration separately before starting the API; the
+process never runs migrations automatically. See
+[`docs/architecture/infrastructure.md`](docs/architecture/infrastructure.md)
+for configuration, health checks, event delivery, and media storage details.
 
-To run backend unit tests:
+### Start the Go API
+
+Load the local environment into the shell, then start the API:
+
 ```bash
+set -a
+. services/backend/.env.example
+set +a
+cd services/backend
+go run ./cmd/api
+```
+The API listens at `http://localhost:8080`; `/healthz` is process liveness and
+`/readyz` reports PostgreSQL and optional Redis status.
+
+To start the worker process in another terminal:
+```bash
+cd services/backend
+go run ./cmd/worker
+```
+
+Backend build, test, and vet commands:
+```bash
+cd services/backend
 go test ./...
+go vet ./...
+go build ./cmd/api ./cmd/worker
 ```

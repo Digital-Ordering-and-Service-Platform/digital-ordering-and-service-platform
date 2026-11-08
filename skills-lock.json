@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "skills": {
+    "atlas": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas/SKILL.md",
+      "computedHash": "5493b66adc6c08ef9ee1ed0ddf49e278b3dc5b2cdc028ad4ff35e7d0cbc9e193"
+    },
+    "atlas-action": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-action/SKILL.md",
+      "computedHash": "0b55d8b0037da60b147899d26c5e9d856bdcf75572199b46c868f9d1364ddf1c"
+    },
+    "atlas-clickhouse": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-clickhouse/SKILL.md",
+      "computedHash": "59743410fa6d433be94b55480ce5ce114c551049c4e58954fe7b3b48413599e1"
+    },
+    "atlas-databricks": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-databricks/SKILL.md",
+      "computedHash": "a6addb30adbb34aa3d47dee7e64d66fcfde2b4d7fd4fbf590c485f4b403e64c5"
+    },
+    "atlas-lakebase": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-lakebase/SKILL.md",
+      "computedHash": "632d8048cda82e0bda0790485431f4b19420f9749ce388ee325bfed84c4aae4f"
+    },
+    "atlas-mssql": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-mssql/SKILL.md",
+      "computedHash": "acfc24dacdfba39b61900f9cc810fafffb62970ebdb392b5d60d4400e2181ba4"
+    },
+    "atlas-mysql": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-mysql/SKILL.md",
+      "computedHash": "8ed2d2de88a32e6163dbd3ca5f8120969d1c59dcc99d4da7bf651442293801f3"
+    },
+    "atlas-onboard": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-onboard/SKILL.md",
+      "computedHash": "7be5dcc14bcc233cac6d289c027fa1a7a5540cde7c636041009820083097c4c9"
+    },
+    "atlas-operator": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-operator/SKILL.md",
+      "computedHash": "373ed6158f85b9785056087dbf8179230fc22985599fe2ef7aed1ebda08e6a89"
+    },
+    "atlas-oracle": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-oracle/SKILL.md",
+      "computedHash": "49d11df08396ef51fbecece1aa12b965fa207306901f18d98f1bcc92efd2c571"
+    },
+    "atlas-postgres": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-postgres/SKILL.md",
+      "computedHash": "38cb4538b3f25792a57f26d9d96f07ac0103243f4ba49796194e86f7ba47cc45"
+    },
+    "atlas-redshift": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-redshift/SKILL.md",
+      "computedHash": "1db73b1db09dcf9eb6aa4894a07bd6682c432182d1150b9f8a2b96c7b86c63e6"
+    },
+    "atlas-snowflake": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-snowflake/SKILL.md",
+      "computedHash": "a2ca14d6b8796b492f31e1afa45aad5625bd51de88c3739520a07b54516c2143"
+    },
+    "atlas-spanner": {
+      "source": "ariga/atlas",
+      "sourceType": "github",
+      "skillPath": "skills/atlas-spanner/SKILL.md",
+      "computedHash": "5f11c32547fb8c8bb459ae24633e65610d963aa744f70a1d0c8e8e462f0e3eb7"
+    }
+  }
+}

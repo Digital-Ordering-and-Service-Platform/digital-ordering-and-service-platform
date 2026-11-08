@@ -1,36 +1,57 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:16-alpine
     container_name: menuflow_postgres
     environment:
-      POSTGRES_DB: menuflow
-      POSTGRES_USER: menuflow_user
-      POSTGRES_PASSWORD: menuflow_password
+      POSTGRES_DB: ${POSTGRES_DB:-menuflow}
+      POSTGRES_USER: ${POSTGRES_USER:-menuflow_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-postgres-change-me}
     ports:
-      - "5432:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U menuflow_user -d menuflow"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
+      start_period: 10s
 
   redis:
     image: redis:7.2-alpine
     container_name: menuflow_redis
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-local-redis-change-me}
+    command: ["sh", "-c", "exec redis-server --appendonly yes --requirepass \"$${REDIS_PASSWORD}\""]
     ports:
-      - "6379:6379"
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" ping | grep -q PONG"]
       interval: 5s
       timeout: 5s
       retries: 5
 
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    container_name: menuflow_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-menuflow_user}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-local-rabbitmq-change-me}
+    ports:
+      - "127.0.0.1:${RABBITMQ_PORT:-5672}:5672"
+      - "127.0.0.1:${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
 volumes:
   postgres_data:
   redis_data:
+  rabbitmq_data:
