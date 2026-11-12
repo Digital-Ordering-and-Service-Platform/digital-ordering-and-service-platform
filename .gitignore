@@ -12,6 +12,7 @@ public/output.css
 .env
 .env*.local
 *.pem
+.envrc
 
 # System & IDE
 .DS_Store
